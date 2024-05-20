@@ -43,3 +43,5 @@
 // Extra om tid
 1. Throttling
 2. To disable logging add  level: :info in config.exs
+3. Show latency in frontend
+4. Show the new routes
