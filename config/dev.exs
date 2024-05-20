@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :theclap, Theclap.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "test",
   hostname: "localhost",
   database: "theclap_dev",
   stacktrace: true,

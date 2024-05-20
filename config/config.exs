@@ -14,7 +14,7 @@ config :theclap,
 # Configures the endpoint
 config :theclap, TheclapWeb.Endpoint,
   url: [host: "localhost"],
-  adapter: Phoenix.Endpoint.Cowboy2Adapter,
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: TheclapWeb.ErrorHTML, json: TheclapWeb.ErrorJSON],
     layout: false
@@ -43,7 +43,7 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.3.2",
+  version: "3.4.0",
   default: [
     args: ~w(
       --config=tailwind.config.js

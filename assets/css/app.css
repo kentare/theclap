@@ -3,3 +3,72 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+* {
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+@layer base {
+  html,
+  body {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  @-webkit-keyframes fadeOutUp {
+    0% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+    }
+    30% {
+      opacity: 0.7;
+      -webkit-transform: translateY(-25px);
+    }
+    100% {
+      opacity: 0;
+      -webkit-transform: translateY(-50px);
+    }
+  }
+
+  @keyframes fadeOutUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    30% {
+      opacity: 0.7;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+  }
+}
+
+@layer components {
+
+  .animated {
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .fadeOutUp {
+    -webkit-animation-name: fadeOutUp;
+    animation-name: fadeOutUp;
+  }
+  .border-item {
+    @apply text-6xl p-6 border-dashed border-4 cursor-pointer border-[#fcde06] rounded-full;
+  }
+  .border-main {
+    @apply text-6xl p-20 border-double border-2 border-[#fcde06] rounded-full;
+  }
+  .slider {
+    @apply w-full h-3 bg-yellow-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700;
+  }
+}
