@@ -12,6 +12,7 @@
 1. PP about processes
 2. Add mount, 2-mount
 3. Add event handling, 2-event
+4. Show where in render the event is sent
 
 
 // 3-pubsub
@@ -32,6 +33,7 @@
 4. Add repo functions to Applause.ex, 4-applause
 5. Add handle_parmas, 4-params
 6. replace handle_event, 4-event
+7. Havoc
 
 
 
