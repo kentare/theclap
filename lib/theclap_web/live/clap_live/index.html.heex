@@ -1,0 +1,42 @@
+<.header>
+  Listing Claps
+  <:actions>
+    <.link patch={~p"/claps/new"}>
+      <.button>New Clap</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="claps"
+  rows={@streams.claps}
+  row_click={fn {_id, clap} -> JS.navigate(~p"/claps/#{clap}") end}
+>
+  <:col :let={{_id, clap}} label="Value"><%= clap.value %></:col>
+  <:col :let={{_id, clap}} label="User"><%= clap.user_id %></:col>
+  <:action :let={{_id, clap}}>
+    <div class="sr-only">
+      <.link navigate={~p"/claps/#{clap}"}>Show</.link>
+    </div>
+    <.link patch={~p"/claps/#{clap}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, clap}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: clap.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="clap-modal" show on_cancel={JS.patch(~p"/claps")}>
+  <.live_component
+    module={TheclapWeb.ClapLive.FormComponent}
+    id={@clap.id || :new}
+    title={@page_title}
+    action={@live_action}
+    clap={@clap}
+    patch={~p"/claps"}
+  />
+</.modal>

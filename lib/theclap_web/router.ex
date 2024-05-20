@@ -18,6 +18,13 @@ defmodule TheclapWeb.Router do
     pipe_through :browser
 
     live "/", App
+
+    live "/claps", ClapLive.Index, :index
+    live "/claps/new", ClapLive.Index, :new
+    live "/claps/:id/edit", ClapLive.Index, :edit
+
+    live "/claps/:id", ClapLive.Show, :show
+    live "/claps/:id/show/edit", ClapLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

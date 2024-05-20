@@ -1,0 +1,27 @@
+<.header>
+  Clap <%= @clap.id %>
+  <:subtitle>This is a clap record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/claps/#{@clap}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit clap</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Value"><%= @clap.value %></:item>
+  <:item title="User"><%= @clap.user_id %></:item>
+</.list>
+
+<.back navigate={~p"/claps"}>Back to claps</.back>
+
+<.modal :if={@live_action == :edit} id="clap-modal" show on_cancel={JS.patch(~p"/claps/#{@clap}")}>
+  <.live_component
+    module={TheclapWeb.ClapLive.FormComponent}
+    id={@clap.id}
+    title={@page_title}
+    action={@live_action}
+    clap={@clap}
+    patch={~p"/claps/#{@clap}"}
+  />
+</.modal>

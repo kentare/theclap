@@ -23,9 +23,21 @@
 5. Show app.js
 
 
-// 4-ecto
+// 4-ecto 
+// Show data persistency
+0.1 Uncomment code in app_live.ex
+1. show PP
+2. generate model: mix phx.gen.live Applause Clap claps value:string user_id:string
+3. Show the generated files
+4. Add repo functions to Applause.ex, 4-applause
+5. Add handle_parmas, 4-params
+6. replace handle_event, 4-event
+
+
+
 
 
 
 // Extra om tid
 1. Throttling
+2. To disable logging add  level: :info in config.exs
