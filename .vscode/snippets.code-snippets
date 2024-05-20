@@ -75,7 +75,4 @@
 			"def handle_event(\"clap\", %{\"icon\" => value}, socket) do\r\n    Phoenix.PubSub.broadcast(Theclap.PubSub, @room, {:clap, value})\r\n\r\n    create_clap(%{user_id: socket.assigns.id, value: value})\r\n\r\n    socket = socket |> update(:claps, &(&1 + 1))\r\n    {:noreply, socket}\r\n  end"
 		],
 	},
-	}
-	
-
 }
