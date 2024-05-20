@@ -42,3 +42,5 @@ defmodule TheclapWeb.Router do
     end
   end
 end
+
+2
