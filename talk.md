@@ -18,9 +18,9 @@
 // Now we will add pubsub and animation based on the pubsub events
 1. Add @room "clap"
 2. Replace mount, 3-mount // Added subscribe
-2. Replace handle_event, 3-event // Adde broadcast
-3. Add handle_info, 3-info  // Handle pubsub events
-
+3. Replace handle_event, 3-event // Adde broadcast
+4. Add handle_info, 3-info  // Handle pubsub events
+5. Show app.js
 
 
 // 4-ecto

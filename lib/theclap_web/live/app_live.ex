@@ -1,16 +1,31 @@
 defmodule TheclapWeb.App do
   use Phoenix.LiveView
 
+  @room "clap"
+
   def mount(_params, _session, socket) do
     total_claps = 0
+
+    :ok = Phoenix.PubSub.subscribe(Theclap.PubSub, @room)
 
     socket = socket |> assign(claps: 0) |> assign(total_claps: total_claps)
 
     {:ok, socket}
   end
 
-  def handle_event("clap", %{"icon" => _value}, socket) do
+  def handle_event("clap", %{"icon" => value}, socket) do
+    Phoenix.PubSub.broadcast(Theclap.PubSub, @room, {:clap, value})
+
     socket = socket |> update(:claps, &(&1 + 1))
+
+    {:noreply, socket}
+  end
+
+  def handle_info({:clap, innerHtml}, socket) do
+    socket =
+      socket
+      |> push_event("client_clap", %{innerHtml: innerHtml})
+      |> update(:total_claps, &(&1 + 1))
 
     {:noreply, socket}
   end
