@@ -1,0 +1,57 @@
+{
+	// Place your theclap workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	// for elixir
+	"2mount": {
+		"scope": "elixir",
+		"prefix": "2-mount",
+		"body": [
+			  "def mount(_params, _session, socket) do \n total_claps = 0 \n\n socket = socket |> assign(claps: 0) |> assign(total_claps: total_claps) \n \n {:ok, socket} \nend"
+		],
+	},
+	"2event": {
+		"scope": "elixir",
+		"prefix": "2-mount",
+		"body": [
+			  "def handle_event(\"clap\", %{\"icon\" => _value}, socket) do\nsocket = socket |> update(:claps, &(&1 + 1))\n\n{:noreply, socket}\nend"
+
+		],
+	},
+	"3mount": {
+		"scope": "elixir",
+		"prefix": "3-mount",
+		"body": [
+			"def mount(_params, _session, socket) do\r\n    total_claps = 0\r\n\r\n    :ok = Phoenix.PubSub.subscribe(Theclap.PubSub, @room)\r\n\r\n    socket = socket |> assign(claps: 0) |> assign(total_claps: total_claps)\r\n\r\n    {:ok, socket}\r\n  end"
+
+		],
+	},
+	"3event": {
+		"scope": "elixir",
+		"prefix": "3-event",
+		"body": [
+			"def handle_event(\"clap\", %{\"icon\" => value}, socket) do\r\n    Phoenix.PubSub.broadcast(Theclap.PubSub, @room, {:clap, value})\r\n\r\n    socket = socket |> update(:claps, &(&1 + 1))\r\n\r\n    {:noreply, socket}\r\n  end"
+		],
+	},
+	"3info": {
+		"scope": "elixir",
+		"prefix": "3-info",
+		"body": [
+			"def handle_info({:clap, innerHtml}, socket) do\r\n    socket =\r\n      socket\r\n      |> push_event(\"client_clap\", %{innerHtml: innerHtml})\r\n      |> update(:total_claps, &(&1 + 1))\r\n\r\n    {:noreply, socket}\r\n  end"
+		],
+	},
+}

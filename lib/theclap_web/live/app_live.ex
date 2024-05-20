@@ -1,12 +1,25 @@
 defmodule TheclapWeb.App do
   use Phoenix.LiveView
 
+  def mount(_params, _session, socket) do
+    total_claps = 0
+
+    socket = socket |> assign(claps: 0) |> assign(total_claps: total_claps)
+
+    {:ok, socket}
+  end
+
+  def handle_event("clap", %{"icon" => _value}, socket) do
+    socket = socket |> update(:claps, &(&1 + 1))
+
+    {:noreply, socket}
+  end
+
   def render(assigns) do
     ~H"""
     <div class="h-dvh ho flex flex-col justify-center items-center gap-5">
       <section id="top" class="bg-green-50 text-2xl sm:text-8xl flex flex-col gap-2 border-main">
-        <%!-- <div id="clap" phx-hook="Clap" /> --%>
-        <%!-- <span class="block">👏:<%= @claps %></span> --%>
+        <div id="clap" phx-hook="Clap" /> <span class="block">👏:<%= @claps %></span>
         <%!-- <span class="block">👏👏:<%= @total_claps %></span> --%>
       </section>
       
