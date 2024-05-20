@@ -26,7 +26,7 @@
 	},
 	"2event": {
 		"scope": "elixir",
-		"prefix": "2-mount",
+		"prefix": "2-event",
 		"body": [
 			  "def handle_event(\"clap\", %{\"icon\" => _value}, socket) do\nsocket = socket |> update(:claps, &(&1 + 1))\n\n{:noreply, socket}\nend"
 
@@ -54,4 +54,26 @@
 			"def handle_info({:clap, innerHtml}, socket) do\r\n    socket =\r\n      socket\r\n      |> push_event(\"client_clap\", %{innerHtml: innerHtml})\r\n      |> update(:total_claps, &(&1 + 1))\r\n\r\n    {:noreply, socket}\r\n  end"
 		],
 	},
+	"4repo": {
+		"scope": "elixir",
+		"prefix": "4-applause",
+		"body": [
+			"def give_me_the_claps!(user_id) do\r\n    query =\r\n      from(claps in Clap,\r\n        where: claps.user_id == ^user_id\r\n      )\r\n\r\n    Repo.aggregate(query, :count)\r\n  end\r\n\r\n  def give_me_the_claps! do\r\n    Repo.aggregate(Clap, :count)\r\n  end"
+		],
+	},
+	"4params": {
+		"scope": "elixir",
+		"prefix": "4-params",
+		"body": [
+			"import Theclap.Applause,\r\n    only: [give_me_the_claps!: 0, give_me_the_claps!: 1, create_clap: 1]\r\n\r\n  def handle_params(%{\"id\" => id} = _params, _uri, socket) do\r\n    claps = give_me_the_claps!(id)\r\n    total_claps = give_me_the_claps!()\r\n\r\n    {:noreply,\r\n     socket |> assign(:id, id) |> assign(:claps, claps) |> assign(:total_claps, total_claps)}\r\n  end\r\n\r\n  def handle_params(_params, _uri, socket) do\r\n    hash = Ecto.UUID.generate()\r\n    {:noreply, redirect(socket, to: \"\/?id=#{hash}\")}\r\n  end"
+		],
+	},
+	"4event": {
+		"scope": "elixir",
+		"prefix": "4-event",
+		"body": [
+			"def handle_event(\"clap\", %{\"icon\" => value}, socket) do\r\n    Phoenix.PubSub.broadcast(Theclap.PubSub, @room, {:clap, value})\r\n\r\n    create_clap(%{user_id: socket.assigns.id, value: value})\r\n\r\n    socket = socket |> update(:claps, &(&1 + 1))\r\n    {:noreply, socket}\r\n  end"
+		],
+	},
 }
+	
