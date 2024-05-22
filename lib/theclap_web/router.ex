@@ -17,7 +17,7 @@ defmodule TheclapWeb.Router do
   scope "/", TheclapWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", App
   end
 
   # Other scopes may use custom stacks.
@@ -42,5 +42,3 @@ defmodule TheclapWeb.Router do
     end
   end
 end
-
-2
