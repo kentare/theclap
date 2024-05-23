@@ -54,6 +54,10 @@
 			"def handle_info({:clap, innerHtml}, socket) do\r\n    socket =\r\n      socket\r\n      |> push_event(\"client_clap\", %{innerHtml: innerHtml})\r\n      |> update(:total_claps, &(&1 + 1))\r\n\r\n    {:noreply, socket}\r\n  end"
 		],
 	},
+	"4form": {
+		"prefix": "4-form",
+		"body": ["\r\n      <form\r\n        phx-submit=\"clap\"\r\n        phx-change=\"clap\"\r\n        class=\"flex justify-center items-center gap-2  mx-auto border-item\"\r\n      >\r\n        <input\r\n          id=\"input\"\r\n          phx-update=\"ignore\"\r\n          class=\"text-6xl w-1\/2 rounded-full\"\r\n          type=\"text\"\r\n          name=\"icon\"\r\n          pattern=\".{1,2}\"\r\n        \/>\r\n        <button type=\"submit\" class=\"text-6xl p-4\">\u2B05\uFE0F<\/button>\r\n        <input\r\n          id=\"range\"\r\n          type=\"range\"\r\n          phx-update=\"ignore\"\r\n          min=\"0\"\r\n          max=\"100\"\r\n          value=\"50\"\r\n          class=\"w-1\/2 slider\"\r\n        \/>\r\n      <\/form>"]	
+	},
 	"4repo": {
 		"scope": "elixir",
 		"prefix": "4-applause",
