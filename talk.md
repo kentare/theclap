@@ -12,8 +12,8 @@
 
 # Part 2. Events and processes
 
-1. Show HTML where event is sent from client (render)
-2. Add mount, 2-mount
+1. Add mount, 2-mount
+2. Show HTML where event is sent from client (render)
 3. Add event handling, 2-event
 4. Show where in render the event is sent
 
@@ -30,11 +30,10 @@
 // Show data persistency
 0.1 Uncomment code in app_live.ex
 
-1. show PP
 2. generate model: mix phx.gen.live Applause Clap claps value:string user_id:string
 3. Show the generated files
-4. Add repo functions to Applause.ex, 4-applause
-5. Add handle_parmas, 4-params
+4. Add handle_parmas, 4-params
+5. Add repo functions to Applause.ex, 4-applause
 6. replace handle_event, 4-event
 7. Havoc
 
